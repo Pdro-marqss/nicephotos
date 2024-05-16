@@ -1,4 +1,5 @@
 import LeftImage from '../../assets/left-image.jpg';
+import TopImage from '../../assets/top-image.jpg';
 import Logo from '../../assets/logo.png';
 
 import './style.scss';
@@ -6,7 +7,11 @@ import './style.scss';
 export function SignUp() {
    return (
       <div className="signup-container">
-         <img src={LeftImage} alt="" />
+         {/* <img src={LeftImage} alt="" /> */}
+         <picture>
+            <source media='(max-width: 1190px)' srcSet={TopImage} />
+            <img src={LeftImage} alt="" />
+         </picture>
 
          <div className='signup-content'>
             <header className='signup-header'>

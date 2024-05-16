@@ -6,9 +6,37 @@
 
    display: flex;
 
-   >img {
-      object-fit: contain;
+   picture {
+      >img {
+         object-fit: contain;
+         height: 100dvh;
+      }
    }
+
+   @media only screen and (max-width: $medium) {
+      flex-direction: column;
+
+      >picture {
+         img {
+            width: 100%;
+            height: 290px;
+            object-fit: cover;
+         }
+      }
+
+   }
+
+   @media only screen and (max-width: $small) {
+      flex-direction: column;
+
+      >picture {
+         img {
+            display: none;
+         }
+      }
+
+   }
+
 
    .signup-content {
       width: 100%;
@@ -60,12 +88,21 @@
 
          padding: 1rem 2rem;
 
+         @media only screen and (max-width: $medium) {
+            margin-top: 1.5rem;
+         }
+
          .input-container {
             display: flex;
             flex-direction: column;
             gap: 5px;
             flex: 1;
             flex-grow: 1;
+
+            @media only screen and (max-width: $medium) {
+               // border: 1px solid red;
+               width: 100%;
+            }
 
             input {
                border: 1px solid $inputBorderColor;
@@ -83,6 +120,11 @@
             align-items: center;
             gap: 1rem;
 
+            @media only screen and (max-width: $medium) {
+               flex-direction: column;
+               align-items: flex-start;
+            }
+
             .fake-cell {
                flex: 1;
             }
@@ -94,6 +136,10 @@
             gap: 5px;
 
             margin-top: 1rem;
+
+            @media only screen and (max-width: $medium) {
+               margin-top: 0;
+            }
 
             input[type=checkbox],
             label {
@@ -129,6 +175,10 @@
          flex-direction: column;
 
          padding: 0 2rem;
+
+         @media only screen and (max-width: $medium) {
+            margin-bottom: 1.5rem;
+         }
 
          p {
             text-align: center;
