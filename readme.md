@@ -12,6 +12,7 @@
 - Prisma ORM
 - Reactjs;
 - Sass;
+- Axios;
 - React-hook-form
 - React-toastfy
 
