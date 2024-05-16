@@ -1,5 +1,8 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import LeftImage from '../../assets/left-image.jpg';
 import TopImage from '../../assets/top-image.jpg';
@@ -14,10 +17,32 @@ type FormValues = {
 
 export function SignIn() {
    const { register, handleSubmit } = useForm<FormValues>();
+   const navigate = useNavigate()
 
    function handleLogin(data: FormValues) {
-      console.log(data);
+      if (data.email !== '' && data.password !== '') {
+         Login(data);
+      } else {
+         toast.error("Seus campos estão vazios")
+      }
    }
+
+   async function Login(data: FormValues) {
+      try {
+         const response = await axios.post('http://localhost:3333/users/login', { email: data.email, password: data.password });
+
+         if (response.data) {
+            toast.success("Login feito com sucesso :D");
+            navigate('/admin');
+         }
+
+      } catch (error) {
+         console.log('Erro ao fazer login: ', error);
+         toast.error("Suas credencias estão incorretas");
+         return false;
+      }
+   }
+
    return (
       <div className="signin-container">
          <picture>

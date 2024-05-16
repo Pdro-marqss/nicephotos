@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import LeftImage from '../../assets/left-image.jpg';
 import TopImage from '../../assets/top-image.jpg';
@@ -12,21 +14,49 @@ type FormValues = {
    email: string;
    emailConfirm: string;
    password: string;
-   birthDate: Date;
+   birthDate: string;
    cel: number;
    checkbox: boolean;
 }
 
 export function SignUp() {
    const { register, handleSubmit } = useForm<FormValues>();
+   const navigate = useNavigate();
 
    function handleSignUp(data: FormValues) {
-      console.log(data);
+      RegisterUser(data);
+   }
+
+   async function RegisterUser(data: FormValues) {
+      if (data.email !== data.emailConfirm) {
+         toast.error("Os emails são diferentes")
+         console.log('Emails diferentes');
+         return
+      }
+
+      if (data.birthDate === '') {
+         toast.error("Coloque sua data de nascimento")
+         console.log('Sem data de nascimento');
+         return
+      }
+
+      try {
+         const response = await axios.post('http://localhost:3333/users', { name: data.name, email: data.email, password: data.password, birthdate: data.birthDate, cel: data.cel, checkbox: data.checkbox });
+
+         if (response.data) {
+            toast.success("Cadastro feito com sucesso :D")
+
+            navigate('/signin');
+
+         }
+
+      } catch (error) {
+         console.log('Erro ao fazer login: ', error);
+      }
    }
 
    return (
       <div className="signup-container">
-         {/* <img src={LeftImage} alt="" /> */}
          <picture>
             <source media='(max-width: 1190px)' srcSet={TopImage} />
             <img src={LeftImage} alt="" />
@@ -39,7 +69,6 @@ export function SignUp() {
                <p>Já possui uma conta?<Link to="/signin"> Faça o login clicando aqui.</Link></p>
             </header>
 
-            {/* vira component depois */}
             <form onSubmit={handleSubmit(handleSignUp)} autoComplete='off'>
                <div className='input-container'>
                   <label htmlFor="name">Nome</label>
