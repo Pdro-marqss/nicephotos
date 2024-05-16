@@ -7,9 +7,9 @@ import { SignUp } from "./pages/signup";
 export function Router() {
    return (
       <Routes>
-         <Route path="/" element={<Navigate to="/login" />} />
-         <Route path="/login" element={<SignIn />} />
-         <Route path="/signin" element={<SignUp />} />
+         <Route path="/" element={<Navigate to="/signup" />} />
+         <Route path="/signin" element={<SignIn />} />
+         <Route path="/signup" element={<SignUp />} />
       </Routes>
    )
 }
