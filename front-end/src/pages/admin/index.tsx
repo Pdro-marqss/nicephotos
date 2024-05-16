@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../assets/logo.png';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import './style.scss';
 
@@ -48,15 +49,13 @@ export function AdminPage() {
       try {
          await axios.delete(`http://localhost:3333/users/${id}`);
 
-         // if (response.data) {
-         //    toast.success("Login feito com sucesso :D");
-         //    navigate('/admin');
-         // }
+
+         toast.success("Usuario deletado");
+
 
       } catch (error) {
          console.log('Erro ao deletar: ', error);
-         // toast.error("Suas credencias estão incorretas");
-         // return false;
+         toast.error("Erro ao deletar o usuario");
       }
    }
 
