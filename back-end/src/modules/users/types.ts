@@ -11,3 +11,7 @@ export interface LoginUserInterface {
    email: string;
    password: string;
 }
+
+export interface DeleteUserInterface {
+   id: string;
+}
