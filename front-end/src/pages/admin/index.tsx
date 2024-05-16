@@ -19,7 +19,7 @@ export function AdminPage() {
 
    useEffect(() => {
       getUsers();
-   }, []);
+   }, [usersData]);
 
    async function getUsers() {
       try {
@@ -33,6 +33,33 @@ export function AdminPage() {
       }
    }
 
+   function handleDelete(id: string) {
+      if (usersData) {
+         DeleteUser(id);
+      }
+      // if (data.email !== '' && data.password !== '') {
+      //    Login(data);
+      // } else {
+      //    toast.error("Seus campos estão vazios")
+      // }
+   }
+
+   async function DeleteUser(id: string) {
+      try {
+         await axios.delete(`http://localhost:3333/users/${id}`);
+
+         // if (response.data) {
+         //    toast.success("Login feito com sucesso :D");
+         //    navigate('/admin');
+         // }
+
+      } catch (error) {
+         console.log('Erro ao deletar: ', error);
+         // toast.error("Suas credencias estão incorretas");
+         // return false;
+      }
+   }
+
    return (
       <div className="admin-page-container">
          <header>
@@ -42,13 +69,18 @@ export function AdminPage() {
 
          <div className='users-list-container'>
             {usersData ? usersData.map((item) => (
-               <div className='user-list-cell'>
-                  <p><span>id: </span>{item.id}</p>
-                  <p><span>Nome: </span>{item.name}</p>
-                  <p><span>Email: </span>{item.email}</p>
-                  <p><span>Data de nascimento: </span>{item.birthdate}</p>
-                  <p><span>Celular: </span>{item.cel}</p>
-                  <p><span>Gostaria de receber ofertas por email: </span>{item.checkbox ? 'Sim' : 'Não'}</p>
+               <div className='user-list-cell' key={item.id}>
+                  <div className='user-list-infos'>
+                     <p><span>id: </span>{item.id}</p>
+                     <p><span>Nome: </span>{item.name}</p>
+                     <p><span>Email: </span>{item.email}</p>
+                     <p><span>Data de nascimento: </span>{item.birthdate}</p>
+                     <p><span>Celular: </span>{item.cel}</p>
+                     <p><span>Gostaria de receber ofertas por email: </span>{item.checkbox ? 'Sim' : 'Não'}</p>
+                  </div>
+
+                  <button onClick={() => handleDelete(item.id)}>Deletar usuario</button>
+
                   <div className='divider'></div>
                </div>
             )) : <p>carregando...</p>}

@@ -34,25 +34,47 @@
       margin-top: 6rem;
 
       .user-list-cell {
+         // border: 1px solid red;
          display: flex;
          flex-direction: column;
-         gap: 8px;
+         align-items: center;
+         gap: 2.5rem;
 
-         p {
-            font-weight: 400;
+         .user-list-infos {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
 
-            span {
-               color: $textSpanBlue;
-               font-weight: 500;
+            p {
+               font-weight: 400;
+
+               span {
+                  color: $textSpanBlue;
+                  font-weight: 500;
+               }
+            }
+         }
+
+         >button {
+            width: 100%;
+            height: 40px;
+            background-color: $mainRed;
+            color: white;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+               background-color: $mainRedHover;
             }
          }
 
          .divider {
             width: 100%;
             height: 2px;
-            margin-top: 2rem;
+            // margin-top: 2rem;
             background-color: rgb(228, 228, 228);
          }
       }
+
    }
 }
