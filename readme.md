@@ -29,7 +29,7 @@
 
 ## Prints do projeto
 
-<p style="text-align:center">
+<div align="center">
    <img align="center" src="./.github/front1.png" style="margin-bottom: 10px" />
   
    <img align="center" src="./.github/front2.png" style="margin-bottom: 10px" />
@@ -37,4 +37,4 @@
    <img align="center" src="./.github/front3.png" style="margin-bottom: 10px" />
    
    <img align="center" src="./.github/backend.png" style="margin-bottom: 10px" />
-</p>
+</div>
